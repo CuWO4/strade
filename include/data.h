@@ -8,7 +8,9 @@
 #include <iostream>
 #include <vector>
 
-extern_ FILE    *g_souce_file;
+#define TEMPORARY_INTERMEDIATE_FILE_NAME "temporary_intermediate_file.tmp"
+
+extern_ FILE    *g_source_file;
 extern_ FILE    *g_target_file;
 
 extern_ int     g_line;

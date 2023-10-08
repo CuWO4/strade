@@ -40,15 +40,15 @@ void console(int argc, char **argv) {
                 }
             }
             else {
-                if (g_souce_file != nullptr) {
+                if (g_source_file != nullptr) {
                     std::string error_info = "Unknown option \"";
                     error_info += argv[i];
                     error_info += "\"!";
                     throw error_info;
                 }
 
-                g_souce_file = fopen(argv[i], "r");
-                if (g_souce_file == nullptr) {
+                g_source_file = fopen(argv[i], "r");
+                if (g_source_file == nullptr) {
                     std::string error_info = "Failed to open the source file \"";
                     error_info += argv[i]; 
                     error_info += "\"!";
@@ -58,7 +58,7 @@ void console(int argc, char **argv) {
             }
         }
 
-        if (g_souce_file == nullptr) 
+        if (g_source_file == nullptr) 
             throw std::string("No source file specified!");
 
         if (g_target_file == nullptr) { /* default taget file */
