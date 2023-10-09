@@ -4,21 +4,16 @@
 
 #include <iostream>
 
-static void tab_to_space(FILE *in, FILE *out, int tab_equaling_spaces) {
-    char c;
-    while ((c = fgetc(in)) != EOF) {
-        if (c == '\t') {
-            for (int i = 0; i < tab_equaling_spaces; i++) 
-                fputc(' ', out);
-        }
-        else fputc(c, out);
+static void tab_to_space(std::string &s, int tab_equaling_spaces) {
+    std::string tmp = "";
+    for (unsigned i = 0; i < s.length(); i++) {
+        if (s[i] == '\t') 
+            for (int j = 0; j < tab_equaling_spaces; j++) tmp += ' ';   /* can be optimized by metaprogramming */
+        else tmp += s[i];
     }
+    s = tmp;
 }
 
 void preprocess(int tab_equaling_spaces) {
-    FILE *tmp = fopen(TEMPORARY_INTERMEDIATE_FILE_NAME, "w");
-    tab_to_space(g_source_file, tmp, tab_equaling_spaces);
-    fclose(g_source_file);
-    fclose(tmp);
-    g_source_file = fopen(TEMPORARY_INTERMEDIATE_FILE_NAME, "r");
+    tab_to_space(g_text, tab_equaling_spaces);
 }
