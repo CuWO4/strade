@@ -8,11 +8,6 @@ static bool is_control_char(char ch) {
     return ch == '{' || ch == ';' || ch == '}';
 }
 
-static void vector_assign(std::vector<int> &vec, int i, int x) { /* for unknown reason, vector::push_back() crushes. */
-    vec.reserve((i / 10 + 1) * 10);
-    vec[i] = 0; 
-}
-
 void transform(void) {
     std::string tmp = "";
     int in_bracket = 0;
@@ -26,6 +21,7 @@ void transform(void) {
         if (i + 1 < g_text.length()) {
             if (g_text[i] == '/' && g_text[i + 1] == '/') {
                 tmp += '\n';
+                for (int j = 0; j < g_space_count[g_line]; j++) tmp += ' ';
                 for (; i < g_text.length() && g_text[i] != '\n'; i++) {
                     tmp += g_text[i];
                     g_char_count[g_line]++;
@@ -33,6 +29,7 @@ void transform(void) {
             }
             if (g_text[i] == '/' && g_text[i + 1] == '*') {
                 tmp += '\n';
+                for (int j = 0; j < g_space_count[g_line]; j++) tmp += ' ';
                 for (; i < g_text.length() - 1 &&
                     !(g_text[i] == '*' && g_text[i + 1] == '/'); i++) {
                     tmp += g_text[i];
@@ -81,7 +78,7 @@ void transform(void) {
         }
         else if (g_text[i] == '\n') {
             g_line++;
-            vector_assign(g_char_count, g_line, 0);
+            g_char_count[g_line] = 0;
             tmp += '\n';
         }
         else {
