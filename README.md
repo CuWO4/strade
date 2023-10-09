@@ -23,7 +23,9 @@
 > strade [SOURCE] (-o [TARGET]) (-w [MAX_WIDTH])
 
 `[SOURCE]` 指定要变换的源.
+
 `-o [TARGET]` 可选, 指定目标. 默认为源文件加上`-strade`后缀.
+
 `-w [MAX_WIDTH]` 可选, 指定分号及花括号被对齐到第几个字符. 默认为`120`.
 
 
